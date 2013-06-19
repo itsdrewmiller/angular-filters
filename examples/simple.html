@@ -5,15 +5,6 @@
         <script src="http://code.jquery.com/jquery-1.10.1.min.js" ></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js" ></script>
         <script src="../src/angular-filters.js"></script>
-        <style>
-        	.scroller {
-        		white-space: pre-line;
-                height: 720px;
-                width: 480px;
-                overflow-y: hidden;
-                position: relative;
-        	}
-        </style>
     </head>
     <body ng-app="myApp" ng-controller="AppCtrl">
 
@@ -32,7 +23,6 @@
         <span>{{filter.subject}}</span>
         <span>{{filter.assignedTo}}</span>
 
-
         <script>
         	var app = angular.module('myApp', ['filters']);
 
@@ -40,7 +30,6 @@
 
                 $scope.filter = {};
             };
-
  
         </script>
     </body>
