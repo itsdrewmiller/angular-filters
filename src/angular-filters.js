@@ -4,14 +4,14 @@ angular.module('filters', [])
             restrict: 'E',
             transclude: 'true',
             template:   '    <div>' + 
-                        '        <div id="visibleFilters"></div>' + 
+                        '        <div class="visibleFilters"></div>' + 
                         '        <select id="newFilter" ' + 
                         '               ng-model="selectedFilter" ' + 
                         '                ng-options="filter.title for filter in hiddenFilters" ' + 
                         '                ng-change="showFilter(selectedFilter)">' + 
                         '            <option value="">Select Filter</option>' + 
                         '        </select>' + 
-                        '        <div id="hiddenFilters" ng-show="false" ng-transclude></div>' + 
+                        '        <div class="hiddenFilters" ng-show="false" ng-transclude></div>' + 
                         '    </div>',
             controller: function($scope, $element) {
                 $scope.hiddenFilters = [];
@@ -24,10 +24,9 @@ angular.module('filters', [])
 
                 this.hideFilter = function(filterElem)  {
                     if (!filterElem) { return; }
-                    console.dir(filterElem);
                     $scope.hiddenFilters.push(filterElem);
                     $scope.hiddenFilters.sort(function(a, b) { return a.title.localeCompare(b.title); })
-                    $element.find('#hiddenFilters').append(filterElem);
+                    $element.find('.hiddenFilters').append(filterElem);
                 };
 
                 $scope.showFilter = function(filterElem)  {
@@ -35,7 +34,7 @@ angular.module('filters', [])
                     var indexToSplice = _.indexOf($scope.hiddenFilters, filterElem);
                     $scope.hiddenFilters.splice(indexToSplice, 1);
                     $scope.visibleFilters.push(filterElem);
-                    $element.find('#visibleFilters').append(filterElem);
+                    $element.find('.visibleFilters').append(filterElem);
                     $scope.selectedFilter = null;
                 };
 
@@ -52,12 +51,10 @@ angular.module('filters', [])
             template: '<div><label>{{title}}</label><span ng-transclude></span><span ng-click="clear()">X</span></div>',
             scope: { ngModel: '=' },
             link: function(scope, iElem, iAttrs, filterBoxCtrl) {
-                console.dir(iAttrs);
                 iElem.title = iAttrs.filterTitle;
                 scope.title = iAttrs.filterTitle;
                 filterBoxCtrl.addFilter(iElem);
                 scope.clear = function() {
-                    console.log('Click!');
                     filterBoxCtrl.hideFilter(iElem);
                     scope.ngModel = null;
                 };

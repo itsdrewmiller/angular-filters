@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js" ></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js" ></script>
+        <script src="../src/angular-filters.js"></script>
+        <style>
+        	.scroller {
+        		white-space: pre-line;
+                height: 720px;
+                width: 480px;
+                overflow-y: hidden;
+                position: relative;
+        	}
+        </style>
+    </head>
+    <body ng-app="myApp" ng-controller="AppCtrl">
+
+        <filter-box>
+            <input ng-model="filter.text" filter filter-title="Text"/>
+            <input ng-model="filter.subject" filter filter-title="Subject" />
+            <select ng-model="filter.assignedTo" filter filter-title="Assigned To">
+                <option value=""></option>
+                <option value="me">Me</option>
+                <option value="you">You</option>
+                <option value="other">Somebody Else</option>
+            </select>
+        </filter-box>
+
+        <span>{{filter.text}}</span>
+        <span>{{filter.subject}}</span>
+        <span>{{filter.assignedTo}}</span>
+
+
+        <script>
+        	var app = angular.module('myApp', ['filters']);
+
+            var AppCtrl = function($scope) {
+
+                $scope.filter = {};
+            };
+
+ 
+        </script>
+    </body>
+</html>
